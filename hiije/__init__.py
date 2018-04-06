@@ -25,10 +25,13 @@ def load_matrix_from_csv(csvfile):
 
 def text_2_binary_txn(textList, ormClass, sasession):
     """Takes a 1Xn Text List and returns a 1x169 binary list with 1s where items were present in the original list and zeros otherwise"""
+    if not isinstance(textList, list):
+    	raise TypeError("Input to function <text_2_binary_txn> must be of type <list>")
+
     indexList=[]
     binList=[]
     for thing in textList:
-        temp= sasession.query(ormClass).filter(name == thing).all()
+        temp= sasession.query(ormClass).filter(ormClass.name == thing).all()
         assert len(temp) == 1
         indexList.append(temp[0].id)
         #print temp.id
