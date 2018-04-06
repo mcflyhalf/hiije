@@ -1,4 +1,29 @@
 
+from sqlalchemy import Column, String, Integer
+Base = declarative_base()
+	
+class Item(Base):
+	__tablename__ = "item"
+
+	id = Column(Integer, primary_key=True)
+	name = Column(String)
+
+	def __init__(self, itemName):
+		assert isinstance(itemName, str)
+		_name = processWord(itemName)
+		#TODO> Confirm that _name is a valid item
+		self.name = _name
+
+	def processWord(wordin):      # For each item(word), make it all lower case, remove special characters and white spaces
+	    word = wordin
+	    word.strip()
+	    word= word.lower()
+	    word= word.replace(" ","")
+	    for ch in word:
+	        if ch in "`~!@#$%^&*()_-+={[]}|',./?;:":
+	            word= word.replace(ch, "")
+
+	    return word
 
 
 class Recommend:
@@ -18,3 +43,5 @@ class Recommend:
 
 
 
+res = session.query(Item).filter(Item.name == "rollsbuns").all()
+print res[0].name, res[0].id

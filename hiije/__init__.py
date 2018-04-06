@@ -23,13 +23,14 @@ def load_matrix_from_csv(csvfile):
 
 	return item_sim_matrix
 
-def text_2_binary_txn(textList,peeweeTable):
+def text_2_binary_txn(textList, ormClass, sasession):
     """Takes a 1Xn Text List and returns a 1x169 binary list with 1s where items were present in the original list and zeros otherwise"""
     indexList=[]
     binList=[]
     for thing in textList:
-        temp= peeweeTable.get(peeweeTable.name == thing)
-        indexList.append(temp.id)
+        temp= sasession.query(ormClass).filter(name == thing).all()
+        assert len(temp) == 1
+        indexList.append(temp[0].id)
         #print temp.id
         
 
