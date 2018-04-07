@@ -1,6 +1,9 @@
+#TODO:> Clean up imports. Have the ones in init go back to their place
 
 from sqlalchemy import Column, String, Integer
+from __init__ import *
 Base = declarative_base()
+from numpy import dot
 	
 class Item(Base):
 	__tablename__ = "item"
@@ -41,7 +44,49 @@ class Recommend:
 
 			self._basket = list(self._basket)	#Needs to be a list so it is iterable
 
+	@property
+	def recommendation(self, model_filename = 'II Similarity matrix (cosine_sim)NORMALISED10.csv', num_recommendations = 1):
+		'''Function that returns the recommended item(s) limited to 5 recommendations max'''
+		max_recommendations = 5
 
+		if num_recommendations <= 0:
+			raise ValueError("Cannot give {} recommendations".format(num_recommendations))
 
-res = session.query(Item).filter(Item.name == "rollsbuns").all()
-print res[0].name, res[0].id
+		elif num_recommendations > max_recommendations:
+			raise ValueError("Cannot give more than {} recommendations. Requested for {} recommendations".format(max_recommendations, num_recommendations))
+
+		assert isinstance(model_filename, str)
+
+		item_similarity_matrix = load_matrix_from_csv(model_filename)
+		likelihoods = list()
+
+		binary_transaction = text_2_binary_txn(self._basket, Item, session)
+
+		for i in range(len(item_similarity_matrix)):
+			prob= dot(binary_transaction, item_similarity_matrix[i])      #How likely is the customer likely to buy item i given their current basket
+			likelihoods.append(prob)
+
+		#Set probability of items already in the basket to zero
+		for i in range(len(self._basket)):
+			if self._basket[i] == 1:
+				likelihoods[i] = 0
+
+		sorted_likelihoods = likelihoods[:]
+		sorted_likelihoods.sort(reverse=True)
+
+		assert len(sorted_likelihoods) > max_recommendations
+		_recommendation = dict()
+
+		for i in range(num_recommendations):
+			recommended_item_index = likelihoods.index(sorted_likelihoods[i])
+			recommended_item_name =  session.query(Item).filter(Item.id == recommended_item_index).all()
+			recommended_item_name = recommended_item_name[0].name
+			_recommendation.update({i:[recommended_item_name, sorted_likelihoods[i]]})
+
+		recom_result = dict()
+
+		recom_result.update({"Requested basket":self._basket})
+		recom_result.update({"Hiije top {} recommendation".format(num_recommendations): _recommendation})
+
+		return recom_result
+

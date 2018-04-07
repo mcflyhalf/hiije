@@ -5,10 +5,11 @@ import os
 
 def load_matrix_from_csv(csvfile):
 	item_sim_matrix = list()
-	with open (csvfile, 'r') as csvmodel:
+	with open(csvfile, 'r') as csvmodel:
 		line_num = 0
 		for line in csvmodel:
 			item_sim_matrix.append(list())
+			temp_num = ''
 			for ch in line:
 				if ch not in {',','\n'}:
 					temp_num += ch
@@ -87,5 +88,5 @@ class Item(Base):
 
 	    return word
 
-res = session.query(Item).filter(Item.name == "rollsbuns").all()
-print res[0].name, res[0].id
+#res = session.query(Item).filter(Item.name == "rollsbuns").all()
+#print res[0].name, res[0].id
