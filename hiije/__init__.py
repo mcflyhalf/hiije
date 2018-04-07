@@ -32,8 +32,13 @@ def text_2_binary_txn(textList, ormClass, sasession):
     indexList=[]
     binList=[]
     for thing in textList:
-        temp= sasession.query(ormClass).filter(ormClass.name == thing).all()
-        assert len(temp) == 1
+        temp= sasession.query(ormClass).filter(ormClass.name == thing.strip()).all()
+        try:
+        	assert len(temp) == 1
+
+        except:
+        	if len(temp) == 0:
+        		raise ValueError("Unknown item. Item <{}> not in database".format(thing))
         indexList.append(temp[0].id)
         #print temp.id
         
