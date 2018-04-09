@@ -3,10 +3,10 @@
 <TITLE>Basket Input</TITLE>
 <body>
 
-<form action="/action_page.php" method="get">
+<form action="/viewrecommendation/3/" method="POST">
 
 	{%for prod in item%}
-		<input type="checkbox" name="prod" value="prod"> {{prod}}<br><br>
+		<input type="checkbox" name={{prod}} value=prod> {{prod}}<br><br>
 	{%endfor%}
 	<input type="submit" value="Submit">
 </form>

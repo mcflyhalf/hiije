@@ -17,13 +17,16 @@ app = Flask(__name__)
 
 #Get custom number of recommendations
 @app.route('/recommendations/<int:num_recoms>/', methods = ['POST'])
-def get_multiple_recoms(num_recoms):
-	basket = request.json["basket"] #a csv string
-	basket = basket.split(',')
+def get_multiple_recoms(num_recoms, basket=None):
+	if basket == None:
+		basket = request.json["basket"] #a csv string
+		basket = basket.split(',')
+
 	log.info("Getting recommendation for {}".format(basket))
 	result = Recommend(basket)
 	json_result = json.dumps(result.recommendation(num_recoms))
 	return json_result
+
 
 
 
@@ -34,7 +37,15 @@ def get_multiple_recoms(num_recoms):
 #Get recommendations to be rendered to a webpage
 @app.route('/viewrecommendation/<int:num_recoms>/', methods = ['POST'])
 def view_recoms(num_recoms):
-	
+	basket = list()
+	for key in request.form:
+		basket.append(request.form[key])
+
+	if len(basket) == 0:
+		return "Raise appropriate Error for empty list."
+	else:
+		return get_multiple_recoms(num_recoms, basket)
+	#return render_template()
 
 #Show Previous recommendations??
 
