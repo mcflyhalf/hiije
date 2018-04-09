@@ -24,6 +24,17 @@ def load_matrix_from_csv(csvfile):
 
 	return item_sim_matrix
 
+def get_item_list(itemList_file="item_List_ALL.txt"):
+	itemList = list()
+	with open (itemList_file) as items:
+		for item in items:
+			if not (item.strip() == ''):
+				itemList.append(item.strip())
+
+	return itemList 
+
+
+
 def text_2_binary_txn(textList, ormClass, sasession):
     """Takes a 1Xn Text List and returns a 1x169 binary list with 1s where items were present in the original list and zeros otherwise"""
     if not isinstance(textList, list):

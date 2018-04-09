@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<TITLE>Basket Input</TITLE>
+<body>
+
+<form action="/action_page.php" method="get">
+
+	{%for prod in item%}
+		<input type="checkbox" name="prod" value="prod"> {{prod}}<br><br>
+	{%endfor%}
+	<input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
