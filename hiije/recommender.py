@@ -81,12 +81,13 @@ class Recommend:
 			recommended_item_index = likelihoods.index(sorted_likelihoods[i])
 			recommended_item_name =  session.query(Item).filter(Item.id == recommended_item_index).all()
 			recommended_item_name = recommended_item_name[0].name
-			_recommendation.update({i:[recommended_item_name, sorted_likelihoods[i]]})
+			_recommendation.update({i+1:[recommended_item_name, sorted_likelihoods[i]]})	#i+1 makes this dict seem like it is 1 indexed in the json response
 
 		recom_result = dict()
 
 		recom_result.update({"Requested basket":self._basket})
 		recom_result.update({"Hiije top {} recommendation".format(num_recommendations): _recommendation})
+		recom_result.update({"Requested recommendations":num_recommendations})
 
 		return recom_result
 

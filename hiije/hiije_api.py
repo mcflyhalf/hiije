@@ -15,6 +15,12 @@ log.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
 
+###########>>>>>>ROUTES<<<<<<<###############
+
+#
+#Routes to be consumed by other applications
+#
+
 #Get custom number of recommendations
 @app.route('/recommendations/<int:num_recoms>/', methods = ['POST'])
 def get_multiple_recoms(num_recoms, basket=None):
@@ -33,7 +39,9 @@ def get_multiple_recoms(num_recoms, basket=None):
 #Get 1 recommendation (should call the custom recoms)
 #@app.route('/recommendation/', methods = ['POST'])
 
-
+#
+#Routes to be consumed by a web browser (these need a pretty output)
+#
 #Get recommendations to be rendered to a webpage
 @app.route('/viewrecommendation/<int:num_recoms>/', methods = ['POST'])
 def view_recoms(num_recoms):
@@ -47,17 +55,16 @@ def view_recoms(num_recoms):
 		return get_multiple_recoms(num_recoms, basket)
 	#return render_template()
 
-#Show Previous recommendations??
-
-
-
-
 #Landing Html page to ask for recoms graphically
 @app.route('/')
 @app.route('/index/')
 def landing():
 	item = get_item_list()
 	return render_template('request_recom.html', item = item )
+
+
+#######>>>>END ROUTES<<<<########
+
 
 app.debug = True
 if __name__ == '__main__':
