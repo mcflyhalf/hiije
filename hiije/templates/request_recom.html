@@ -6,7 +6,7 @@
 <form action="/viewrecommendation/3/" method="POST">
 
 	{%for prod in item%}
-		<input type="checkbox" name={{prod}} value=prod> {{prod}}<br><br>
+		<input type="checkbox" name=product value={{prod}}> {{prod}}<br><br>
 	{%endfor%}
 	<input type="submit" value="Submit">
 </form>

@@ -80,8 +80,12 @@ class Recommend:
 		for i in range(num_recommendations):
 			recommended_item_index = likelihoods.index(sorted_likelihoods[i])
 			recommended_item_name =  session.query(Item).filter(Item.id == recommended_item_index).all()
-			recommended_item_name = recommended_item_name[0].name
-			_recommendation.update({i+1:[recommended_item_name, sorted_likelihoods[i]]})	#i+1 makes this dict seem like it is 1 indexed in the json response
+			if len(recommended_item_name) == 0:
+				_recommendation.update({"Error":"No further recommendations available for the selected basket"})
+
+			else:
+				recommended_item_name = recommended_item_name[0].name
+				_recommendation.update({i+1:[recommended_item_name, sorted_likelihoods[i]]})	#i+1 makes this dict seem like it is 1 indexed in the json response
 
 		recom_result = dict()
 
