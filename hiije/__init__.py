@@ -2,6 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import os
+import logging
+import sys
 
 def load_matrix_from_csv(csvfile):
 	item_sim_matrix = list()
@@ -23,6 +25,7 @@ def load_matrix_from_csv(csvfile):
 
 
 	return item_sim_matrix
+
 
 def get_item_list(itemList_file="item_List_ALL.txt"):
 	itemList = list()
@@ -63,6 +66,16 @@ def text_2_binary_txn(textList, ormClass, sasession):
             binList.append(0)
 
     return binList
+
+
+def get_logger():
+	log = logging.getLogger(__name__)
+	out_hdlr = logging.StreamHandler(sys.stdout)
+	out_hdlr.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+	out_hdlr.setLevel(logging.INFO)
+	log.addHandler(out_hdlr)
+	return log
+
 
 #create sqlalchemy engine and session
 

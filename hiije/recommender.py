@@ -4,6 +4,8 @@ from sqlalchemy import Column, String, Integer
 from __init__ import *
 Base = declarative_base()
 from numpy import dot
+
+log = get_logger()
 	
 class Item(Base):
 	__tablename__ = "item"

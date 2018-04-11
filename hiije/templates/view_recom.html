@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<TITLE>Hiije recommendation</TITLE>
+<body>
+
+<div>
+	
+	Number of Recommendations requested >> {{result["Requested recommendations"]}}
+	RECOMMENDATIONS
+
+	<table style="width= auto">
+		<tr>
+			<th>Recommendation Number |</th>
+			<th>Recommended item |</th>
+			<th>Recommendation probability |</th>
+		</tr>	
+
+		{%for key in result["Hiije top {} recommendation".format(num_recoms)]%}
+			<tr>
+				<td>{{key}}</td>
+				<td>{{result["Hiije top {} recommendation".format(num_recoms)][key][0]}}</td>
+				<td>{{result["Hiije top {} recommendation".format(num_recoms)][key][1]}}</td>
+			</tr>
+
+		{%endfor%}	
+
+	</table>
+	
+</div>
+
+
+</body>
+</html>

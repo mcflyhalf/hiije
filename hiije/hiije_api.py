@@ -1,17 +1,10 @@
-from __init__ import get_item_list
+from __init__ import get_item_list, get_logger
 from recommender import Recommend
 from flask import Flask, request, render_template
-import logging
-import sys
 import json
 
-log = logging.getLogger(__name__)
-out_hdlr = logging.StreamHandler(sys.stdout)
-out_hdlr.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
-out_hdlr.setLevel(logging.INFO)
-log.addHandler(out_hdlr)
-
-log.setLevel(logging.DEBUG)
+log = get_logger()
+#log.Set_logging_level
 
 app = Flask(__name__)
 
@@ -31,6 +24,8 @@ def get_multiple_recoms(num_recoms, basket=None):
 	log.info("Getting recommendation for {}".format(basket))
 	result = Recommend(basket)
 	json_result = json.dumps(result.recommendation(num_recoms))
+
+	log.info("Recommendation json representation\n\n{}".format(json_result))
 	return json_result
 
 
@@ -52,7 +47,8 @@ def view_recoms(num_recoms):
 	if len(basket) == 0:
 		return "Raise appropriate Error for empty list."
 	else:
-		return get_multiple_recoms(num_recoms, basket)
+		result = get_multiple_recoms(num_recoms, basket)
+		return render_template('view_recom.html', result = result, num_recoms = num_recoms)
 	#return render_template()
 
 #Landing Html page to ask for recoms graphically
