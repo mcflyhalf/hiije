@@ -1,0 +1,6 @@
+Flask==0.12.2
+grip>=4.5.2
+sqlalchemy==1.2.6
+numpy>=1.14.2
+#mysql_python==1.2.4
+httpie>=0.9.9

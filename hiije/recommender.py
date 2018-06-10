@@ -36,7 +36,7 @@ class Recommend:
 	_basket = list()	#TODO: Determine whether this variable should belong to the class or to the instance
 	def __init__(self, basket):
 		if not isinstance(basket, list):
-			raise TypeError("The input {}> to the <{}> class must be of type <{}>. It is currently of type <{}>".format(basket, self.__class__.__name__, list().__class__.__name__, basket.__class__.__name__))
+			raise TypeError("The input <{}> to the <{}> class must be of type <{}>. It is currently of type <{}>".format(basket, self.__class__.__name__, list().__class__.__name__, basket.__class__.__name__))
 
 		elif len(basket) == 0:
 			raise TypeError("The input <{}> to the <{}> class cannot be an empty list".format(basket, self.__class__.__name__, list().__class__.__name__, basket.__class__.__name__))
