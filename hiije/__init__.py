@@ -79,15 +79,23 @@ def get_logger():
 
 #create sqlalchemy engine and session
 
-engine = create_engine('mysql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
-	dbuser = os.environ['MYSQL_USER'] ,
-	passwd = os.environ['MYSQL_PASS'],
-	host = 'localhost',
-	port = os.environ['MYSQL_PORT'],
-	dbname = os.environ['MYSQL_HIIJE_DBNAME']))
+# engine = create_engine('postgresql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
+# 	dbuser = os.environ['POSTGRES_USER'] ,
+# 	passwd = os.environ['POSTGRES_PASS'],
+# 	host = 'localhost',
+# 	port = os.environ['POSTGRES_PORT'],
+# 	dbname = os.environ['POSTGRES_HIIJE_DBNAME']))
 
-Session = sessionmaker(bind=engine)
-session = Session()
+
+test_engine = create_engine('postgresql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
+	dbuser = "mcflyhalf" ,
+	passwd = "Kasuku",
+	host = 'localhost',
+	port = "5432",
+	dbname = "hiije_test"))
+
+#Session = sessionmaker(bind=engine)
+#session = Session()
 
 
 #Take this to Recommender class

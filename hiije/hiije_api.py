@@ -1,5 +1,5 @@
-from __init__ import get_item_list, get_logger
-from recommender import Recommend
+#from __init__ import get_item_list, get_logger
+from .recommender import Recommend
 from flask import Flask, request, render_template
 import json
 
