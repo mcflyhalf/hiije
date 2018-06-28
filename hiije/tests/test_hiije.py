@@ -25,12 +25,21 @@ class TestDatabase(unittest.TestCase):
 
 	def test_db_connection(self):
 		try:
-			from __init__ import engine
+			from hiije import test_engine as engine
 			conn= engine.connect()
-			res=conn.execute("SELECT * FROM testitems LIMIT 1")
+			res=conn.execute("SELECT * FROM item LIMIT 1")
+
+		
+		except ImportError:
+			self.fail("Import Failure>> Could not import database engine")
+
+		except KeyError:
+			self.fail("OS Environment Failure>> Could not find certain environment variables")
+
 
 		except:
-			self.fail("Database Failure>> Could not connect to database or issue query")
+			self.fail("General DB failure>> Try to manually issue the statements in test_hiije.TestDatabase.test_db_connection and see the resulting errors")
+
 	
 	def test_random_thing(self):
 		self.assertEqual(2,1+1)

@@ -77,25 +77,50 @@ def get_logger():
 	return log
 
 
-#create sqlalchemy engine and session
+#create sqlalchemy engine (for actual use), test engine(for testing db connection) and session (only for the engine)
 
-# engine = create_engine('postgresql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
-# 	dbuser = os.environ['POSTGRES_USER'] ,
-# 	passwd = os.environ['POSTGRES_PASS'],
-# 	host = 'localhost',
-# 	port = os.environ['POSTGRES_PORT'],
-# 	dbname = os.environ['POSTGRES_HIIJE_DBNAME']))
+engine = create_engine('postgresql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
+	dbuser = os.environ['POSTGRES_USER'] ,
+	passwd = os.environ['POSTGRES_PASS'],
+	host = 'localhost',
+	port = os.environ['POSTGRES_PORT'],
+	dbname = os.environ['POSTGRES_HIIJE_DBNAME']))
 
 
 test_engine = create_engine('postgresql://{dbuser}:{passwd}@{host}:{port}/{dbname}'.format(\
-	dbuser = "mcflyhalf" ,
-	passwd = "Kasuku",
+	dbuser = os.environ['POSTGRES_USER'] ,
+	passwd = os.environ['POSTGRES_PASS'],
 	host = 'localhost',
-	port = "5432",
-	dbname = "hiije_test"))
+	port = os.environ['POSTGRES_PORT'],
+	dbname = os.environ['POSTGRES_HIIJE_TEST_DBNAME']))
 
 #Session = sessionmaker(bind=engine)
 #session = Session()
+
+class CreateSimilarityMatrix:
+	def __init__(self, filename,historical_transactions):	
+		if filename.endswith(".csv"):
+			self.filename = filename
+			#										TODO: Also check that the filename doesnt already have another filetype e.g .txt or something
+		else:
+			self.filename = filename + ".csv"
+
+	def cosineSim(self, k=50):
+		#Create cosine similarity matrix
+		#Remember to save the location of the matrix in the config file
+		pass
+
+	def conditionalProb(self, k=50):
+		#Create conditional probability matrix
+		#Remember to save the location of the matrix in config file
+		pass
+
+
+
+
+
+
+
 
 
 #Take this to Recommender class
@@ -127,3 +152,16 @@ class Item(Base):
 
 #res = session.query(Item).filter(Item.name == "rollsbuns").all()
 #print res[0].name, res[0].id
+
+
+class PopulateDB:
+	def __init__(self, itemList_file, is_empty = True):
+		pass
+
+	def populate_item_database(self):
+		pass
+
+	def populate_transaction_database(self):
+		#This method is put here but will never be needed because the transaction DB is populated by a
+		#request for recommendation and not at initialisation.
+		pass

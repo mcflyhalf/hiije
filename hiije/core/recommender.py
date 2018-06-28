@@ -1,11 +1,12 @@
 #TODO:> Clean up imports. Have the ones in init go back to their place
 
 from sqlalchemy import Column, String, Integer
-from __init__ import *
-Base = declarative_base()
+import hiije
+#from __init__ import *
+Base = hiije.declarative_base()
 from numpy import dot
 
-log = get_logger()
+log = hiije.get_logger()
 	
 class Item(Base):
 	__tablename__ = "item"
