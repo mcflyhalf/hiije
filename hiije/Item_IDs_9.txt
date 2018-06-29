@@ -1,0 +1,10 @@
+1,wholemilk,whole milk
+2,othervegetables,other vegetables
+3,rollsbuns,rolls/buns
+4,soda,soda
+5,yogurt,yogurt
+6,bottledwater,bottled water
+7,rootvegetables,root vegetables
+8,tropicalfruit,tropical fruit
+9,shoppingbags,shopping bags
+

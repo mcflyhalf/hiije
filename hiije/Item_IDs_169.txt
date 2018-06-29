@@ -1,0 +1,169 @@
+1,wholemilk,whole milk
+2,othervegetables,other vegetables
+3,rollsbuns,rolls/buns
+4,soda,soda
+5,yogurt,yogurt
+6,bottledwater,bottled water
+7,rootvegetables,root vegetables
+8,tropicalfruit,tropical fruit
+9,shoppingbags,shopping bags
+10,sausage,sausage
+11,pastry,pastry
+12,citrusfruit,citrus fruit
+13,bottledbeer,bottled beer
+14,newspapers,newspapers
+15,cannedbeer,canned beer
+16,pipfruit,pip fruit
+17,fruitvegetablejuice,fruit/vegetable juice
+18,whippedsourcream,whipped/sour cream
+19,brownbread,brown bread
+20,domesticeggs,domestic eggs
+21,frankfurter,frankfurter
+22,margarine,margarine
+23,coffee,coffee
+24,pork,pork
+25,butter,butter
+26,curd,curd
+27,beef,beef
+28,napkins,napkins
+29,chocolate,chocolate
+30,frozenvegetables,frozen vegetables
+31,chicken,chicken
+32,whitebread,white bread
+33,creamcheese,cream cheese 
+34,waffles,waffles
+35,saltysnack,salty snack
+36,longlifebakeryproduct,long life bakery product
+37,dessert,dessert
+38,sugar,sugar
+39,uhtmilk,UHT-milk
+40,hamburgermeat,hamburger meat
+41,berries,berries
+42,hygienearticles,hygiene articles
+43,onions,onions
+44,specialtychocolate,specialty chocolate
+45,candy,candy
+46,miscbeverages,misc. beverages
+47,frozenmeals,frozen meals
+48,oil,oil
+49,buttermilk,butter milk
+50,specialtybar,specialty bar
+51,ham,ham
+52,beverages,beverages
+53,meat,meat
+54,icecream,ice cream
+55,slicedcheese,sliced cheese
+56,hardcheese,hard cheese
+57,catfood,cat food
+58,grapes,grapes
+59,chewinggum,chewing gum
+60,redblushwine,red/blush wine
+61,detergent,detergent
+62,whitewine,white wine
+63,pickledvegetables,pickled vegetables
+64,semifinishedbread,semi-finished bread
+65,bakingpowder,baking powder
+66,dishes,dishes
+67,flour,flour
+68,potplants,pot plants
+69,softcheese,soft cheese
+70,processedcheese,processed cheese
+71,herbs,herbs
+72,pasta,pasta
+73,cannedfish,canned fish
+74,seasonalproducts,seasonal products
+75,cakebar,cake bar
+76,packagedfruitvegetables,packaged fruit/vegetables
+77,mustard,mustard
+78,frozenfish,frozen fish
+79,clingfilmbags,cling film/bags
+80,spreadcheese,spread cheese
+81,liquor,liquor
+82,salt,salt
+83,frozendessert,frozen dessert
+84,cannedvegetables,canned vegetables
+85,dishcleaner,dish cleaner
+86,flowerseeds,flower (seeds)
+87,rollproducts,roll products 
+88,condensedmilk,condensed milk
+89,petcare,pet care
+90,photofilm,photo/film
+91,mayonnaise,mayonnaise
+92,sweetspreads,sweet spreads
+93,chocolatemarshmallow,chocolate marshmallow
+94,candles,candles
+95,specialtycheese,specialty cheese
+96,dogfood,dog food
+97,frozenpotatoproducts,frozen potato products
+98,housekeepingproducts,house keeping products
+99,turkey,turkey
+100,instantfoodproducts,Instant food products
+101,liquorappetizer,liquor (appetizer)
+102,rice,rice
+103,instantcoffee,instant coffee
+104,popcorn,popcorn
+105,zwieback,zwieback
+106,soups,soups
+107,vinegar,vinegar
+108,finishedproducts,finished products
+109,femalesanitaryproducts,female sanitary products
+110,kitchentowels,kitchen towels
+111,dentalcare,dental care
+112,cereals,cereals
+113,sparklingwine,sparkling wine
+114,softener,softener
+115,sauces,sauces
+116,jam,jam
+117,spices,spices
+118,liverloaf,liver loaf
+119,curdcheese,curd cheese
+120,cleaner,cleaner
+121,malecosmetics,male cosmetics
+122,rum,rum
+123,meatspreads,meat spreads
+124,ketchup,ketchup
+125,lightbulbs,light bulbs
+126,brandy,brandy
+127,tea,tea
+128,specialtyfat,specialty fat
+129,skincare,skin care
+130,abrasivecleaner,abrasive cleaner
+131,nutsprunes,nuts/prunes
+132,syrup,syrup
+133,cannedfruit,canned fruit
+134,artifsweetener,artif. sweetener
+135,nutsnack,nut snack
+136,snackproducts,snack products
+137,fish,fish
+138,potatoproducts,potato products
+139,cookware,cookware
+140,bathroomcleaner,bathroom cleaner
+141,soap,soap
+142,cookingchocolate,cooking chocolate
+143,tidbits,tidbits
+144,puddingpowder,pudding powder
+145,organicsausage,organic sausage
+146,cocoadrinks,cocoa drinks
+147,prosecco,prosecco
+148,flowersoilfertilizer,flower soil/fertilizer
+149,readysoups,ready soups
+150,specialtyvegetables,specialty vegetables
+151,organicproducts,organic products
+152,honey,honey
+153,decalcifier,decalcifier
+154,cream,cream
+155,frozenfruits,frozen fruits
+156,hairspray,hair spray
+157,rubbingalcohol,rubbing alcohol
+158,liqueur,liqueur
+159,whisky,whisky
+160,saladdressing,salad dressing
+161,makeupremover,make up remover
+162,toiletcleaner,toilet cleaner
+163,frozenchicken,frozen chicken
+164,babycosmetics,baby cosmetics
+165,kitchenutensil,kitchen utensil
+166,bags,bags
+167,preservationproducts,preservation products
+168,soundstoragemedium,sound storage medium
+169,babyfood,baby food
