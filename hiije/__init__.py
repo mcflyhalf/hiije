@@ -119,19 +119,30 @@ def text_2_binary_txn(textList, ormClass, sasession):
 	return binList
 
 
+#Need to fix this logger. Currently does not log info or lower
+
 def get_logger():
 	log = logging.getLogger(__name__)
-	out_hdlr = logging.StreamHandler(sys.stdout)
-	out_hdlr.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
-	out_hdlr.setLevel(logging.INFO)
-	log.addHandler(out_hdlr)
+	# File handler which logs even debug messages
+	fh = logging.FileHandler('hiije.log')
+	fh.setLevel(logging.DEBUG)
+	# Console handler that logs warnings or higher
+	ch = logging.StreamHandler()
+	ch.setLevel(logging.INFO)
+	# create formatter and add it to the handlers
+	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+	fh.setFormatter(formatter)
+	ch.setFormatter(formatter)
+	# add the handlers to the logger
+	log.addHandler(fh)
+	log.addHandler(ch)
 	return log
 ###########End of Global Functions#######################
 
 ###########Start of Global Classes########################
 #------These are either used for setup or general purposes
 
-
+log = get_logger()
 class UniqueItemFile:
 	def __init__(self, infile, outfilename = "Item_IDs"):
 		assert isinstance(infile,file)		#infile should be a file object and not a filename
@@ -273,18 +284,15 @@ class PopulateDB:
 					item.fancy_name = fancyName.title()
 					item.item_id = int(item_id)
 
+					#store quantities in db
 					try:
-						test_session.add(item)
-						#log.info("adding item with unique ID {}, name {} and fancy name {} to database {}")	#TODO >> mAKE THIS WORK
+						session.add(item)
+						log.warn("adding item with unique ID {}, name {} and fancy name {} to database <<DBname to be added>>".format(item.item_id, item.name, item.fancy_name))	#TODO >> mAKE THIS WORK
 
 					except:
-						#log.debug("Failed to add item with unique ID {}, name {} and fancy name {} to database {}")
-
-			test_session.commit()
+						log.error("Failed to add item with unique ID {}, name {} and fancy name {} to database <<DBname to be Added>>. FATAL ERROR".format(item.item_id, item.name, item.fancy_name, ))
+						raise
 				
-
-				#store quantities in db
-		pass
 
 	def populate_transaction_database(self):
 		#This method is put here but will never be needed because the transaction DB is populated by a
@@ -292,8 +300,15 @@ class PopulateDB:
 		pass
 
 
-populatedb = PopulateDB("Item_IDs_9.txt")
-item = populatedb.populate_item_database()
+# log.debug('debug message')
+# log.info('info message')
+# log.warn('warn message')
+# log.error('error message')
+# log.critical('critical message')
+
+#How to actually populate the DB. This is implemented in setup.py
+# populatedb = PopulateDB("Item_IDs_169.txt")
+# populatedb.populate_item_database()
 
 # line = "Juicy Fruit, Candy, CaNdy, Cola, Anti-freeze, cola, rolls/buns, shampoo"
 # items = dict()

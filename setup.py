@@ -1,7 +1,9 @@
 from setuptools import setup
 from sqlalchemy import *
 from hiije import test_engine
-from hiije import get_logger 
+from hiije import engine
+from hiije import get_logger
+from hiije import PopulateDB
 import ConfigParser
 
 setup()
@@ -35,11 +37,11 @@ class HiijeConfig:
 				# self.config.set('User Values','similarity model type', 'Cosine Similarity')
 				# self.config.set('User Values','similarity model filename', '/opt/Cosine_sim_model' )
 
-		with open(config_filename, 'wb') as configfile:
+		with open(self.config_filename, 'wb') as configfile:
 			self.config.write(configfile)
-			logger.debug("Written config info to file {}".format(config_filename))
+			logger.debug("Written config info to file {}".format(self.config_filename))
 
-	def configure_database():
+	def configure_database(self):
 		#Create(but not populate) the database and db tables
 		metadata = MetaData()
 		item_table_name = self.config.get('User Values', 'itemTableName')
@@ -85,11 +87,31 @@ class HiijeConfig:
 			Column(transaction_table_name +"_details", JSON))
 
 		#Actually create the tables
-		metadata.create_all(test_engine)
+		metadata.create_all(engine)
 		logger.debug("The tables {} and {} currently exist".format(item_table_name,transaction_table_name))
 
 
+
 #Create testdb and test table
+config_vals = config_defaults
+logger.warn("Creating Config values and creating databases")
+hiijeconfig = HiijeConfig()
+hiijeconfig.configure_preferences(config_vals)
+logger.warn("Configured preferences in {}".format(hiijeconfig.config_filename))
+hiijeconfig.configure_database()
+logger.warn("Created databases for Hiije")
+
+#populate db
+itemIDfilename = "Item_IDs_169.txt"
+logger.warn("Populating item Database from file {}".format(itemIDfilename))
+populatedb = PopulateDB(itemIDfilename)
+populatedb.populate_item_database()
+logger.warn("Populated item Database")
+
+
+#populate test db
+
+
 
 #Create similarity matrix >>Now done in hiije.__init__
 
