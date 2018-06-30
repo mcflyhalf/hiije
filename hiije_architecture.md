@@ -14,18 +14,22 @@ The setup basically comes up with the Item similarity matrix.
 
 This should be done in the following ways:
 
-1. Ready-to-drink database
+1. Ready-to-drink database file
 
-	A database file that already contains the item-similarity matrix values in some format. This file would come from a separate source where the similarity values were computed and stored in a db and the db exported. The exported file is what is referred to here
+	A file that already contains the item-similarity matrix values in some format. This file would come from a separate source where the similarity values were computed and stored in file.
 
 1. Text-based historical record file
 
 	In this case the input is a file containing plain text in csv format. The system will take this file and use it to generate an item similarity matrix. A few things which will also need to be generated along the way are:
 	* Unique item list. A list of each unique item appearing in the input file
 	* Unique IDs for each unique item. This may be the name as given in the unique item list or a numerical UID or some other form of appropriate unique identifier
-	* The item similarity matrix in some form such as a database table.
+	* The item similarity matrix in some form such as a csv file
 
-The setup also runs unit/integration tests.
+The setup also 
+	* creates default config parameters 
+	* creates database tables (it requires the database to be pre existing)
+	* populates the database from the Unique item List file and 
+	* runs unit/integration tests
 
 
 ### Recommender
@@ -42,10 +46,10 @@ Having access to the item similarity matrix, the recommender provides a class wh
 	* Recommendation_score(s)- The weight given to each recommendation. This is a number between 0 and 1 where 0 means not recommended at all and 1 means highly recommended.
 	* Request_time- Timestamp of the time when the request was received.
 	* Request_duration- The amount of time it took to compute and return the recommendations
-To do this, a recommender object needs access to the itm similarity matrix (database)
+To do this, a recommender object needs access to the item similarity matrix (file)
 
 ### hiije_api
-The api provides access ot the services of the recommender. Using the api, it is possible to:
+The api provides access to the services of the recommender. Using the api, it is possible to:
 * Make a request and receive a recommendation. This uses a post request with a list of either unique item names or UID's. The recommendation is returned as a json object.
 * See the last 10 recommendations.
 * See a particular recommendation given its recommendation ID

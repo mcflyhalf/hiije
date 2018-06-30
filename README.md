@@ -13,4 +13,4 @@ TODO... <create sample use>
 
 
 ## Hiije Architecture
-Hiije is organised into 2 bits TODO... <create write up architectural organisation>
+The architecture of the Hiije python project is described in a separate [hiije architecture documentation](https://github.com/mcflyhalf/hiije/blob/master/hiije_architecture.md). This is recommended for programmers who may want to understand, modify or extend Hiije in Python.
