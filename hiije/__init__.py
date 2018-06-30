@@ -14,7 +14,7 @@ def load_matrix_from_csv(csvfile):
 			item_sim_matrix.append(list())
 			temp_num = ''
 			for ch in line:
-				if ch not in {',','\n'}:
+				if ch not in {',','\n', '\r'}:
 					temp_num += ch
 				else:
 					if temp_num != '':
@@ -78,7 +78,7 @@ def countItem(item,itemCounts):            #Add item to dictionary or increase c
 
 
 
-def get_item_list(itemList_file="item_List_ALL.txt"):
+def get_item_list(itemList_file="Item_list_ALL.txt"):
 	itemList = list()
 	with open (itemList_file) as items:
 		for item in items:
@@ -104,7 +104,7 @@ def text_2_binary_txn(textList, ormClass, sasession):
 		except:
 			if len(temp) == 0:
 				raise ValueError("Unknown item. Item <{}> not in database".format(thing))
-		indexList.append(temp[0].id)
+		indexList.append(temp[0].item_id)
 		#print temp.id
 
 

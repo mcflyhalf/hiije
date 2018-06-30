@@ -1,5 +1,6 @@
-#from __init__ import get_item_list, get_logger
-from .recommender import Recommend
+from hiije import get_logger 
+from hiije import get_item_list
+from hiije.core.recommender import Recommend
 from flask import Flask, request, render_template
 import json
 
@@ -42,12 +43,15 @@ def get_multiple_recoms(num_recoms, basket=None):
 def view_recoms(num_recoms):
 	basket = list()
 	for key in request.form:
-		basket.append(request.form[key])
+		for product in request.form.getlist(key):
+			basket.append(product)
+		
 
 	if len(basket) == 0:
 		return "Raise appropriate Error for empty list."
 	else:
 		result = get_multiple_recoms(num_recoms, basket)
+		return result
 		return render_template('view_recom.html', result = result, num_recoms = num_recoms)
 	#return render_template()
 

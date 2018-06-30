@@ -2,34 +2,34 @@
 
 from sqlalchemy import Column, String, Integer
 import hiije
-#from __init__ import *
+from hiije import Item, session
 Base = hiije.declarative_base()
 from numpy import dot
 
 log = hiije.get_logger()
 	
-class Item(Base):
-	__tablename__ = "item"
+# class Item(Base):
+# 	__tablename__ = "item"
 
-	id = Column(Integer, primary_key=True)
-	name = Column(String)
+# 	id = Column(Integer, primary_key=True)
+# 	name = Column(String)
 
-	def __init__(self, itemName):
-		assert isinstance(itemName, str)
-		_name = processWord(itemName)
-		#TODO> Confirm that _name is a valid item
-		self.name = _name
+# 	def __init__(self, itemName):
+# 		assert isinstance(itemName, str)
+# 		_name = processWord(itemName)
+# 		#TODO> Confirm that _name is a valid item
+# 		self.name = _name
 
-	def processWord(wordin):      # For each item(word), make it all lower case, remove special characters and white spaces
-	    word = wordin
-	    word.strip()
-	    word= word.lower()
-	    word= word.replace(" ","")
-	    for ch in word:
-	        if ch in "`~!@#$%^&*()_-+={[]}|',./?;:":
-	            word= word.replace(ch, "")
+# 	def processWord(wordin):      # For each item(word), make it all lower case, remove special characters and white spaces
+# 	    word = wordin
+# 	    word.strip()
+# 	    word= word.lower()
+# 	    word= word.replace(" ","")
+# 	    for ch in word:
+# 	        if ch in "`~!@#$%^&*()_-+={[]}|',./?;:":
+# 	            word= word.replace(ch, "")
 
-	    return word
+# 	    return word
 
 
 class Recommend:
@@ -60,10 +60,10 @@ class Recommend:
 
 		assert isinstance(model_filename, str)
 
-		item_similarity_matrix = load_matrix_from_csv(model_filename)
+		item_similarity_matrix = hiije.load_matrix_from_csv(model_filename)
 		likelihoods = list()
 
-		binary_transaction = text_2_binary_txn(self._basket, Item, session)
+		binary_transaction = hiije.text_2_binary_txn(self._basket, Item, hiije.session)
 
 		for i in range(len(item_similarity_matrix)):
 			prob= dot(binary_transaction, item_similarity_matrix[i])      #How likely is the customer likely to buy item i given their current basket
@@ -82,7 +82,7 @@ class Recommend:
 
 		for i in range(num_recommendations):
 			recommended_item_index = likelihoods.index(sorted_likelihoods[i])
-			recommended_item_name =  session.query(Item).filter(Item.id == recommended_item_index).all()
+			recommended_item_name =  session.query(Item).filter(Item.item_id == recommended_item_index).all()
 			if len(recommended_item_name) == 0:
 				_recommendation.update({"Error":"No further recommendations available for the selected basket"})
 
