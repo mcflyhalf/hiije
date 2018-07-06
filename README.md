@@ -1,6 +1,6 @@
 # HIIJE
 
-*Hiije* is a recommendation system currently built for grocery recommendations. The system itself is an implementation of [the work of Karypis and Deshpande](http://glaros.dtc.umn.edu/gkhome/fetch/papers/itemrsTOIS04.pdf). The description there is very technical and is recommended for people who actually intend to implement, extend or adapt the algorithm in some way. For ordinary humans who may just want to use it and see how cool it is, there is a layman's explanation provided TODO...<create explanation and provide link>...
+*Hiije* is a recommendation system currently built for grocery recommendations. The system itself is an implementation of [the work of Karypis and Deshpande](http://glaros.dtc.umn.edu/gkhome/fetch/papers/itemrsTOIS04.pdf). The description there is very technical and is recommended for people who actually intend to implement, extend or adapt the algorithm in some way. For ordinary humans who may just want to use it and see how cool it is, there is a [layman's explanation](https://github.com/mcflyhalf/hiije/tree/43b25df37893998810bb291b22530c7a1e9c3f02/Doc) provided.
 
 The name **Hiije** is a combination of 2 Kiswahili words that form a question.
 
