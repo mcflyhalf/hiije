@@ -1,5 +1,5 @@
-from hiije import get_logger 
-from hiije import get_item_list
+from hiije import get_logger, session 
+from hiije import get_item_list, Transaction
 from hiije.core.recommender import Recommend
 from flask import Flask, request, render_template
 import json
@@ -25,7 +25,9 @@ def get_multiple_recoms(num_recoms, basket=None):
 	log.info("Getting recommendation for {}".format(basket))
 	result = Recommend(basket)
 	json_result = json.dumps(result.recommendation(num_recoms))
-
+	transaction = Transaction(json_result)	#Maybe json.loads(json_result)
+	session.add(transaction)
+	session.commit()
 	log.info("Recommendation json representation\n\n{}".format(json_result))
 	return json_result
 
