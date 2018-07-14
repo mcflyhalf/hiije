@@ -15,15 +15,13 @@
 			<th>Recommendation probability |</th>
 		</tr>	
 
-		{%for key in result["Hiije top {} recommendation".format(num_recoms)]%}
+		{%for recom in range(num_recoms)%}
 			<tr>
-				<td>{{key}}</td>
-				<td>{{result["Hiije top {} recommendation".format(num_recoms)][key][0]}}</td>
-				<td>{{result["Hiije top {} recommendation".format(num_recoms)][key][1]}}</td>
+				<td>{{recom+1}}</td>
+				<td>{{result["Hiije top {} recommendation".format(num_recoms)][str_nums[recom]][0]}}</td>
+				<td>{{result["Hiije top {} recommendation".format(num_recoms)][str_nums[recom]][1]}}</td>
 			</tr>
-
-		{%endfor%}	
-
+		{%endfor%}
 	</table>
 	
 </div>

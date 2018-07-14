@@ -45,14 +45,16 @@ def view_recoms(num_recoms):
 	for key in request.form:
 		for product in request.form.getlist(key):
 			basket.append(product)
-		
 
 	if len(basket) == 0:
 		return "Raise appropriate Error for empty list."
 	else:
 		result = get_multiple_recoms(num_recoms, basket)
-		return result
-		return render_template('view_recom.html', result = result, num_recoms = num_recoms)
+		result = json.loads(result)
+		str_nums = list()
+		for i in range (1,num_recoms+1):
+			str_nums.append(str(i))
+		return render_template('view_recom.html', result = result, num_recoms = num_recoms, str_nums=str_nums)
 	#return render_template()
 
 #Landing Html page to ask for recoms graphically
