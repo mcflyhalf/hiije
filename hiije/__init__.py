@@ -1,10 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.types import JSON
 import os
 import logging
 import sys
 import csv
+import datetime
 
 def load_matrix_from_csv(csvfile):
 	item_sim_matrix = list()
@@ -234,7 +236,7 @@ test_session = TestSession()
 
 
 #Take this to Recommender class
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, DateTime
 Base = declarative_base()
 	
 class Item(Base):
@@ -256,6 +258,21 @@ class Item(Base):
 
 	def get_fancyName(self):
 		pass
+
+
+class Transaction(Base):
+	__tablename__ = "transaction"
+
+	transaction_id = Column(Integer, primary_key = True)
+	transaction_datetime = Column(DateTime(), nullable = False)
+	transaction_details = Column(JSON)
+
+	def __init__(self,txn_details):
+		self.transaction_details = txn_details
+		dt = datetime.datetime.utcnow()
+		self.transaction_datetime = dt.isoformat()
+		#transaction id is autoincremented in psql
+
 
 
 #res = session.query(Item).filter(Item.name == "rollsbuns").all()
@@ -287,7 +304,7 @@ class PopulateDB:
 					#store quantities in db
 					try:
 						session.add(item)
-						log.warn("adding item with unique ID {}, name {} and fancy name {} to database <<DBname to be added>>".format(item.item_id, item.name, item.fancy_name))	#TODO >> mAKE THIS WORK
+						log.info("adding item with unique ID {}, name {} and fancy name {} to database <<DBname to be added>>".format(item.item_id, item.name, item.fancy_name))	#TODO >> mAKE THIS WORK
 
 					except:
 						log.error("Failed to add item with unique ID {}, name {} and fancy name {} to database <<DBname to be Added>>. FATAL ERROR".format(item.item_id, item.name, item.fancy_name, ))
