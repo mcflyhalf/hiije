@@ -1,10 +1,12 @@
-from hiije import get_logger, session 
-from hiije import get_item_list, Transaction
+from hiije import session 
+import logging
+from hiije import get_item_list, Transaction,get_logger
 from hiije.core.recommender import Recommend
 from flask import Flask, request, render_template
 import json
 
 log = get_logger()
+log.setLevel(logging.DEBUG)
 #log.Set_logging_level
 
 app = Flask(__name__)
@@ -28,7 +30,8 @@ def get_multiple_recoms(num_recoms, basket=None):
 	transaction = Transaction(json_result)	#Maybe json.loads(json_result)
 	session.add(transaction)
 	session.commit()
-	log.info("Recommendation json representation\n\n{}".format(json_result))
+	log.info("Persisted transaction with {}\n".format(transaction.transaction_details))
+	log.info("Recommendation json representation\n\tvvvvvvvvvv\n{}".format(json_result))
 	return json_result
 
 
