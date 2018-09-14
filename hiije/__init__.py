@@ -121,7 +121,7 @@ def text_2_binary_txn(textList, ormClass, sasession):
 	return binList
 
 
-#Need to fix this logger. Currently does not log info or lower
+#TODO: fix this logger. Currently does not log info or lower
 
 def get_logger():
 	log = logging.getLogger(__name__)
@@ -136,8 +136,10 @@ def get_logger():
 	fh.setFormatter(formatter)
 	ch.setFormatter(formatter)
 	# add the handlers to the logger
-	log.addHandler(fh)
-	log.addHandler(ch)
+	print "Adding a set of handlers now"
+	if len(log.handlers)< 2:
+		log.addHandler(fh)
+		log.addHandler(ch)
 	return log
 ###########End of Global Functions#######################
 
