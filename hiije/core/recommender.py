@@ -7,7 +7,7 @@ Base = hiije.declarative_base()
 from numpy import dot
 
 
-log = hiije.log
+log = hiije.get_logger(__name__)
 
 
 class Recommend:

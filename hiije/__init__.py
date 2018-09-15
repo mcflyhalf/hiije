@@ -121,32 +121,30 @@ def text_2_binary_txn(textList, ormClass, sasession):
 	return binList
 
 
-#TODO: fix this logger. Currently does not log info or lower
-
-def get_logger():
-	log = logging.getLogger(__name__)
+def get_logger(loggerName):
+	log = logging.getLogger(loggerName)
 	# File handler which logs even debug messages
 	fh = logging.FileHandler('hiije.log')
 	fh.setLevel(logging.DEBUG)
 	# Console handler that logs warnings or higher
 	ch = logging.StreamHandler()
-	ch.setLevel(logging.INFO)
+	ch.setLevel(logging.WARNING)
 	# create formatter and add it to the handlers
 	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 	fh.setFormatter(formatter)
 	ch.setFormatter(formatter)
 	# add the handlers to the logger
 	print "Adding a set of handlers now"
-	if len(log.handlers)< 2:
-		log.addHandler(fh)
-		log.addHandler(ch)
+	log.addHandler(fh)
+	log.addHandler(ch)
+	log.setLevel(logging.DEBUG)
 	return log
 ###########End of Global Functions#######################
 
 ###########Start of Global Classes########################
 #------These are either used for setup or general purposes
 
-log = get_logger()
+#log = get_logger(__name__)
 class UniqueItemFile:
 	def __init__(self, infile, outfilename = "Item_IDs"):
 		assert isinstance(infile,file)		#infile should be a file object and not a filename
@@ -317,13 +315,6 @@ class PopulateDB:
 		#This method is put here but will never be needed because the transaction DB is populated by a
 		#request for recommendation and not at initialisation.
 		pass
-
-
-# log.debug('debug message')
-# log.info('info message')
-# log.warn('warn message')
-# log.error('error message')
-# log.critical('critical message')
 
 #How to actually populate the DB. This is implemented in setup.py
 # populatedb = PopulateDB("Item_IDs_169.txt")

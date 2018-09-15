@@ -1,11 +1,12 @@
 from hiije import session 
 import logging
-from hiije import get_item_list, Transaction,log
+from hiije import get_item_list, Transaction,get_logger
 from hiije.core.recommender import Recommend
 from flask import Flask, request, render_template
 import json
 
 #log.setLevel(logging.DEBUG)
+log = get_logger(__name__)
 
 app = Flask(__name__)
 
